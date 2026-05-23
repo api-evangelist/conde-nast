@@ -1,0 +1,110 @@
+vocabulary: conde-nast
+description: >-
+  Vocabulary for Condé Nast's public content surfaces. Condé Nast does not
+  expose a programmable API, so this vocabulary describes the editorial
+  primitives that are publicly observable via RSS, schema.org JSON-LD and
+  XML sitemaps, plus the organizational concepts (brand, edition, parent
+  org) needed to make sense of them.
+modified: '2026-05-23'
+
+terms:
+
+- term: Publisher
+  definition: >-
+    The legal publishing entity. For every Condé Nast property the publisher
+    value is the literal string "Condé Nast", emitted as `<dc:publisher>` in
+    RSS and as `publisher.name` in the on-page schema.org NewsArticle block.
+  schemaOrg: https://schema.org/Organization
+
+- term: ParentOrganization
+  definition: >-
+    Advance Publications, the privately-held S.I. Newhouse family holding
+    company that owns Condé Nast.
+  schemaOrg: https://schema.org/parentOrganization
+
+- term: Brand
+  definition: >-
+    A Condé Nast publishing title (Vogue, GQ, Wired, The New Yorker, etc.).
+    Each brand operates one or more brand sites (often one per geographic
+    edition) and is the unit of editorial identity, audience and
+    monetization.
+
+- term: Edition
+  definition: >-
+    A geographic instance of a brand. Vogue has the largest edition footprint
+    (US, UK, France, Italy, Spain, Mexico & Latin America, India, Taiwan and
+    others); GQ has UK, Italy and Mexico editions in addition to the US
+    flagship. Each edition is its own domain with its own /feed/rss.
+
+- term: Article
+  definition: >-
+    The atomic unit of editorial content. Modeled as schema.org NewsArticle
+    in on-page JSON-LD, with a parallel RSS 2.0 representation in the brand
+    feed. Has a stable 24-char hex content ID exposed as the RSS <guid>.
+  schemaOrg: https://schema.org/NewsArticle
+
+- term: Section
+  definition: >-
+    Top-level site taxonomy (e.g. Gear, Politics, Style, Food, Beauty). The
+    first segment of the breadcrumb and the root of the RSS <category> path.
+  schemaOrg: https://schema.org/articleSection
+
+- term: Tag
+  definition: >-
+    Sub-section labels. Appear as further segments of the RSS <category>
+    hierarchy (e.g. "Gear / Buying Guides", "Gear / Deals") and in the
+    BreadcrumbList JSON-LD.
+
+- term: Subject
+  definition: >-
+    The column, franchise or recurring series the article belongs to
+    (e.g. "Watts Up", "Most Popular"). Emitted as `<dc:subject>` in RSS.
+
+- term: Author
+  definition: >-
+    Byline. Single author or comma-separated list in `<dc:creator>`;
+    structured Person entity in NewsArticle.author JSON-LD.
+  schemaOrg: https://schema.org/Person
+
+- term: Thumbnail
+  definition: >-
+    Lead image. Emitted as `<media:thumbnail>` with width/height attributes
+    in RSS, served from per-brand `media.<brand>.com` or `assets.<brand>.com`
+    CDN origins.
+
+- term: Feed
+  definition: >-
+    An RSS 2.0 document at `/feed/rss` on a brand site. Uses the rss, atom,
+    Dublin Core and Media RSS namespaces. Served from CloudFront with a
+    5-minute cache and an advertised per-user rate limit of 100 requests per
+    window.
+
+- term: Sitemap
+  definition: >-
+    sitemap.org-compliant XML sitemap. `/sitemap.xml` is a sitemap index
+    pointing to per-month sub-sitemaps (`/sitemap-YYYY-MM.xml`).
+
+- term: BreadcrumbList
+  definition: >-
+    Section/tag hierarchy emitted as a second JSON-LD block on every article
+    page. Practical reverse-engineering hook for the brand site taxonomy.
+  schemaOrg: https://schema.org/BreadcrumbList
+
+- term: Copilot
+  definition: >-
+    Condé Nast's internal editorial CMS, used across every brand and edition.
+    Surfaces publicly only through the github.com/CondeNast/copilot-util
+    repository ("Condé Nast — Copilot JavaScript utilities") and the
+    auth-gated technology.condenast.com developer portal.
+
+- term: CondéNastEntertainment
+  definition: >-
+    Video and film production arm launched in 2011. Distributes via brand
+    YouTube channels and embedded brand-site players; no public video
+    catalog API.
+
+- term: ContentLicensing
+  definition: >-
+    The only documented programmatic path to Condé Nast content is
+    bilateral content licensing, brokered via condenast.com/contact. No
+    self-serve developer portal or API key flow exists.

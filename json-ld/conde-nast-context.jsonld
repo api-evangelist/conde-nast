@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "schema": "https://schema.org/",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "media": "http://search.yahoo.com/mrss/",
+    "atom": "http://www.w3.org/2005/Atom",
+    "cn": "https://api-evangelist.github.io/conde-nast/vocabulary#",
+    "id": "@id",
+    "type": "@type",
+    "Publisher": "schema:Organization",
+    "Brand": "cn:Brand",
+    "Article": "schema:NewsArticle",
+    "Author": "schema:Person",
+    "Section": "schema:articleSection",
+    "Feed": "cn:RSSFeed",
+    "Sitemap": "cn:Sitemap",
+    "headline": "schema:headline",
+    "articleBody": "schema:articleBody",
+    "datePublished": "schema:datePublished",
+    "dateModified": "schema:dateModified",
+    "image": { "@id": "schema:image", "@type": "@id" },
+    "url": { "@id": "schema:url", "@type": "@id" },
+    "publisher": { "@id": "schema:publisher", "@type": "@id" },
+    "author": { "@id": "schema:author", "@type": "@id" },
+    "keywords": "schema:keywords",
+    "breadcrumb": "schema:breadcrumb",
+    "mainEntityOfPage": { "@id": "schema:mainEntityOfPage", "@type": "@id" },
+    "category": "dc:subject",
+    "creator": "dc:creator",
+    "subject": "dc:subject",
+    "thumbnail": { "@id": "media:thumbnail", "@type": "@id" },
+    "feedURL": { "@id": "cn:feedURL", "@type": "@id" },
+    "brand": "cn:brand",
+    "edition": "cn:edition"
+  },
+  "@graph": [
+    {
+      "@id": "https://www.condenast.com/#org",
+      "@type": "Organization",
+      "name": "Condé Nast",
+      "url": "https://www.condenast.com",
+      "parentOrganization": {
+        "@id": "https://www.advance.com/#org",
+        "@type": "Organization",
+        "name": "Advance Publications"
+      }
+    },
+    {
+      "@id": "cn:Brand",
+      "@type": "Class",
+      "subClassOf": "schema:Organization",
+      "comment": "A Condé Nast publishing brand (e.g. Vogue, Wired, The New Yorker) — operates one or more brand sites and editions."
+    },
+    {
+      "@id": "cn:RSSFeed",
+      "@type": "Class",
+      "subClassOf": "schema:DataFeed",
+      "comment": "An RSS 2.0 feed served at /feed/rss on a Condé Nast brand site, extended with Dublin Core and Media RSS."
+    },
+    {
+      "@id": "cn:Sitemap",
+      "@type": "Class",
+      "subClassOf": "schema:DataFeed",
+      "comment": "A sitemap.org-compliant XML sitemap; brand-level index plus per-month sub-sitemaps."
+    }
+  ]
+}

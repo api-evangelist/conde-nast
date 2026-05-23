@@ -1,0 +1,347 @@
+aid: conde-nast
+name: Condé Nast
+description: >-
+  Condé Nast is a global media company owned by Advance Publications that
+  produces editorial content across more than two dozen iconic brands —
+  Vogue, GQ, The New Yorker, Wired, Vanity Fair, Bon Appétit, Architectural
+  Digest, Pitchfork, Allure, Glamour, Self, Teen Vogue, Condé Nast Traveler,
+  Epicurious, Tatler, House & Garden, The World of Interiors, Ars Technica,
+  Vogue Business, La Cucina Italiana and Johansens. Public content surfaces
+  are not a developer API but a federated set of brand-level RSS feeds,
+  schema.org NewsArticle JSON-LD on every article, monthly XML sitemaps,
+  syndicated video on YouTube and OTT, and a private editorial CMS
+  (internally known as Copilot) that powers all sites.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+- Media
+- Publishing
+- Magazines
+- News
+- Journalism
+- RSS
+- Video
+- JSON-LD
+- Schema.org
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/conde-nast/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.19'
+apis:
+- aid: conde-nast:brand-rss-feeds
+  name: Condé Nast Brand RSS Feeds
+  description: >-
+    Every Condé Nast brand site serves a top-level RSS 2.0 feed at
+    `/feed/rss` covering the brand's most recent published articles, with
+    Dublin Core (`dc:creator`, `dc:publisher`, `dc:subject`), Media RSS
+    (`media:thumbnail`, `media:keywords`, `media:content`) and Atom
+    self-link extensions. Items include the article title, link, GUID,
+    publish date, description, one or more `<category>` paths reflecting
+    the section/tag taxonomy, the author and keyword set. The feed is
+    served via CloudFront with a 5-minute cache and a soft per-user rate
+    limit advertised in `x-ratelimit-userlimit`/`x-ratelimit-userremaining`
+    headers (observed: 100 req per window). Same path works across US
+    flagships and international editions of Vogue and GQ.
+  humanURL: https://www.condenast.com
+  baseURL: https://www.wired.com
+  tags:
+  - RSS
+  - Syndication
+  - Feeds
+  - Editorial
+  - Media RSS
+  properties:
+  - type: Documentation
+    url: https://www.rssboard.org/rss-specification
+    title: RSS 2.0 Specification (informative — Condé Nast does not publish its own RSS docs)
+  - type: Feed
+    url: https://www.vogue.com/feed/rss
+    title: Vogue
+  - type: Feed
+    url: https://www.gq.com/feed/rss
+    title: GQ
+  - type: Feed
+    url: https://www.newyorker.com/feed/everything/rss
+    title: The New Yorker — Everything
+  - type: Feed
+    url: https://www.wired.com/feed/rss
+    title: WIRED
+  - type: Feed
+    url: https://www.vanityfair.com/feed/rss
+    title: Vanity Fair
+  - type: Feed
+    url: https://www.bonappetit.com/feed/rss
+    title: Bon Appétit
+  - type: Feed
+    url: https://www.architecturaldigest.com/feed/rss
+    title: Architectural Digest
+  - type: Feed
+    url: https://pitchfork.com/feed/feed-album-reviews/rss
+    title: Pitchfork — Album Reviews
+  - type: Feed
+    url: https://www.allure.com/feed/rss
+    title: Allure
+  - type: Feed
+    url: https://www.glamour.com/feed/rss
+    title: Glamour
+  - type: Feed
+    url: https://www.self.com/feed/rss
+    title: Self
+  - type: Feed
+    url: https://www.teenvogue.com/feed/rss
+    title: Teen Vogue
+  - type: Feed
+    url: https://www.cntraveler.com/feed/rss
+    title: Condé Nast Traveler
+  - type: Feed
+    url: https://www.epicurious.com/feed/rss
+    title: Epicurious
+  - type: Feed
+    url: https://www.vogue.co.uk/feed/rss
+    title: Vogue UK
+  - type: Feed
+    url: https://www.vogue.fr/feed/rss
+    title: Vogue Paris
+  - type: Feed
+    url: https://www.vogue.it/feed/rss
+    title: Vogue Italia
+  - type: Feed
+    url: https://www.vogue.mx/feed/rss
+    title: Vogue Mexico & Latin America
+  - type: Feed
+    url: https://www.vogue.es/feed/rss
+    title: Vogue España
+  - type: Feed
+    url: https://www.vogue.in/feed/rss
+    title: Vogue India
+  - type: Feed
+    url: https://www.vogue.com.tw/feed/rss
+    title: Vogue Taiwan
+  - type: Feed
+    url: https://www.gq-magazine.co.uk/feed/rss
+    title: British GQ
+  - type: Feed
+    url: https://www.gqitalia.it/feed/rss
+    title: GQ Italia
+  - type: Feed
+    url: https://www.gq.com.mx/feed/rss
+    title: GQ México y Latinoamérica
+- aid: conde-nast:article-json-ld
+  name: Condé Nast Article JSON-LD
+  description: >-
+    Every published article on every Condé Nast brand site embeds
+    schema.org structured data as `<script type="application/ld+json">`
+    blocks in the page head. The primary block is a `NewsArticle` carrying
+    `articleBody`, `headline`, `datePublished`, `dateModified`, `author`
+    (Person), `publisher` (Organization), `image`, `mainEntityOfPage` and
+    `articleSection`; a second block emits a `BreadcrumbList` reflecting
+    the section and tag hierarchy (e.g. `Gear > Shopping > <article>`).
+    This is the de facto machine-readable contract for Condé Nast content:
+    there is no public REST or GraphQL API.
+  humanURL: https://www.condenast.com
+  tags:
+  - JSON-LD
+  - Schema.org
+  - Structured Data
+  - SEO
+  - NewsArticle
+  - BreadcrumbList
+  properties:
+  - type: Documentation
+    url: https://schema.org/NewsArticle
+    title: schema.org NewsArticle (the contract Condé Nast emits)
+  - type: Documentation
+    url: https://schema.org/BreadcrumbList
+- aid: conde-nast:brand-sitemaps
+  name: Condé Nast Brand Sitemap Index
+  description: >-
+    Each brand site exposes an XML sitemap index at `/sitemap.xml`
+    pointing to per-month sub-sitemaps (e.g.
+    `/sitemap-2026-05.xml`). Sub-sitemaps list every URL published that
+    month with `<lastmod>` timestamps. Used together with the RSS feed
+    this provides a complete historical and incremental crawl surface
+    going back several years (Wired's index reaches back to 2021).
+  humanURL: https://www.wired.com/sitemap.xml
+  tags:
+  - Sitemap
+  - Crawling
+  - SEO
+  - Discovery
+  properties:
+  - type: Documentation
+    url: https://www.sitemaps.org/protocol.html
+  - type: Feed
+    url: https://www.wired.com/sitemap.xml
+  - type: Feed
+    url: https://www.vogue.com/sitemap.xml
+  - type: Feed
+    url: https://www.newyorker.com/sitemap.xml
+- aid: conde-nast:copilot-cms
+  name: Condé Nast Copilot CMS (internal)
+  description: >-
+    Copilot is Condé Nast's internally-developed editorial platform that
+    powers every brand site. Surface evidence in the open: the GitHub
+    repository `CondeNast/copilot-util` is described as "Condé Nast —
+    Copilot JavaScript utilities", and `technology.condenast.com` resolves
+    behind an authenticated developer portal (HTTP 307 redirect to
+    `/auth/signin`). All editorial APIs, internal content services and
+    Copilot itself are private; no external API tokens, OAuth flows or
+    rate-limited public endpoints are documented. This entry exists to
+    name the platform behind the public surfaces rather than to expose an
+    API.
+  humanURL: https://github.com/CondeNast/copilot-util
+  tags:
+  - CMS
+  - Editorial
+  - Internal Platform
+  - Copilot
+  properties:
+  - type: GitHubRepository
+    url: https://github.com/CondeNast/copilot-util
+    title: copilot-util — public JavaScript utilities used inside Copilot
+  - type: DeveloperPortal
+    url: https://technology.condenast.com
+    title: Internal developer portal (auth-gated)
+- aid: conde-nast:video-distribution
+  name: Condé Nast Entertainment Video Distribution
+  description: >-
+    Condé Nast Entertainment, launched in 2011, develops film, TV, social
+    and digital video, and VR. Video is distributed off-platform via
+    brand-owned YouTube channels (WIRED, Vogue, GQ, Vanity Fair, Bon
+    Appétit, The New Yorker, Architectural Digest, Allure, Glamour) and
+    on-platform via embedded players on each brand site. There is no
+    public video catalog API; programmatic access is via YouTube Data API
+    against each channel handle.
+  humanURL: https://www.condenastentertainment.com
+  tags:
+  - Video
+  - YouTube
+  - OTT
+  - Entertainment
+  - Distribution
+  properties:
+  - type: SocialAccount
+    url: https://www.youtube.com/@WIRED
+    title: WIRED YouTube
+  - type: SocialAccount
+    url: https://www.youtube.com/@Vogue
+    title: Vogue YouTube
+  - type: SocialAccount
+    url: https://www.youtube.com/@GQ
+    title: GQ YouTube
+  - type: SocialAccount
+    url: https://www.youtube.com/@VanityFair
+    title: Vanity Fair YouTube
+  - type: SocialAccount
+    url: https://www.youtube.com/@bonappetit
+    title: Bon Appétit YouTube
+common:
+- type: Website
+  url: https://www.condenast.com
+- type: About
+  url: https://www.condenast.com/about
+- type: Brands
+  url: https://www.condenast.com/brands
+- type: Newsroom
+  url: https://www.condenast.com/news
+- type: Careers
+  url: https://www.condenast.com/careers
+- type: ContentLicensing
+  url: https://www.condenast.com/contact
+  title: Content & syndication enquiries (no self-serve developer portal)
+- type: GitHubOrganization
+  url: https://github.com/CondeNast
+  title: 142 public repos as of May 2026 — mostly tooling, Puppet modules, Ember/React utilities, hackathon repos and the Copilot utilities; no public APIs.
+- type: LinkedIn
+  url: https://www.linkedin.com/company/conde-nast
+- type: ParentOrganization
+  url: https://www.advance.com
+  title: Advance Publications (private holding company of S.I. Newhouse family)
+- type: PrivacyPolicy
+  url: https://www.condenast.com/privacy-policy
+- type: TermsOfService
+  url: https://www.condenast.com/user-agreement
+- type: CookiePolicy
+  url: https://www.condenast.com/cookies-policy
+- type: Brands
+  data:
+  - name: Vogue
+    description: Fashion authority; flagship US edition plus 27+ international editions.
+  - name: Vogue Business
+    description: B2B fashion industry news, data and analysis.
+  - name: GQ
+    description: Men's style, culture and grooming.
+  - name: The New Yorker
+    description: Long-form journalism, fiction, criticism and cartoons since 1925.
+  - name: Wired
+    description: Technology, science, business and culture.
+  - name: Vanity Fair
+    description: Hollywood, politics, business and culture journalism.
+  - name: Bon Appétit
+    description: Recipes, restaurants and food culture.
+  - name: Architectural Digest
+    description: Interiors, architecture and design.
+  - name: Pitchfork
+    description: Music reviews and criticism; folded into GQ in 2024 but retains its own site.
+  - name: Allure
+    description: Beauty, skincare and wellness.
+  - name: Glamour
+    description: Women's lifestyle, beauty and entertainment.
+  - name: Self
+    description: Health, fitness and wellness.
+  - name: Teen Vogue
+    description: Young-adult fashion, culture and politics.
+  - name: Condé Nast Traveler
+    description: Travel reporting, hotel reviews and guides.
+  - name: Epicurious
+    description: Recipes, cooking techniques and meal planning.
+  - name: Tatler
+    description: UK society, fashion and lifestyle.
+  - name: House & Garden
+    description: UK interiors, gardens and design.
+  - name: The World of Interiors
+    description: High-end interiors and design.
+  - name: Ars Technica
+    description: Technology, science and policy journalism.
+  - name: La Cucina Italiana
+    description: Italian cooking, ingredients and culture.
+  - name: Johansens
+    description: Curated luxury hotel and travel guide brand.
+- type: ContentSurfaces
+  data:
+  - name: RSS 2.0 feeds
+    description: Universal `/feed/rss` on every brand domain — US flagships plus international Vogue and GQ.
+  - name: NewsArticle JSON-LD
+    description: schema.org NewsArticle + BreadcrumbList on every article page.
+  - name: Monthly XML sitemaps
+    description: Per-brand `/sitemap.xml` index with per-month sub-sitemaps going back several years.
+  - name: YouTube channels
+    description: Brand-level YouTube channels are the primary public video distribution surface.
+  - name: Newsletters
+    description: Brand-level email newsletters — opt-in via each brand site; no API.
+  - name: Podcasts
+    description: Brand-level podcast feeds distributed via Apple Podcasts, Spotify and standard podcast RSS.
+- type: NoPublicAPI
+  data:
+  - name: No public REST or GraphQL API
+    description: Condé Nast does not operate a public content API. There is no developer portal, no API key signup and no rate-limit / pricing page for programmatic content access.
+  - name: No OpenAPI specification
+    description: No OpenAPI, AsyncAPI, GraphQL schema, JSON Schema or Postman collection is published.
+  - name: No status page
+    description: No public status.condenast.com or per-brand status page.
+  - name: Internal developer portal
+    description: technology.condenast.com exists but redirects to /auth/signin; no public-facing documentation.
+- type: Scale
+  data:
+  - name: Print reach
+    description: '"More than 72 million consumers in print" across all brands (per Wikipedia summary of company reported numbers).'
+  - name: Digital reach
+    description: '"394 million in digital" monthly consumers across owned and operated properties.'
+  - name: Social reach
+    description: '"454 million across social media platforms" across all brands.'
+  - name: GitHub footprint
+    description: 142 public repositories on github.com/CondeNast as of May 2026; the org is dominated by historical tooling (Puppet, Ember, React utilities), hackathon repos and Copilot-related utilities — no SDKs, no public APIs.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

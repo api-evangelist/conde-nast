@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/conde-nast/json-schema/conde-nast-article-schema.json",
+  "title": "Condé Nast Article",
+  "description": "Normalized representation of a Condé Nast article as derived from the brand RSS feed (RSS 2.0 + Dublin Core + Media RSS) plus the on-page schema.org NewsArticle JSON-LD block. Condé Nast does not publish an article API; this schema describes the merged, publicly observable shape.",
+  "type": "object",
+  "required": ["id", "title", "url", "publisher", "brand", "datePublished"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable identifier — the RSS <guid> value (24-char hex content ID)."
+    },
+    "title": {
+      "type": "string",
+      "description": "Article headline — RSS <title>, equivalent to schema.org NewsArticle.headline."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical article URL on the brand site."
+    },
+    "description": {
+      "type": "string",
+      "description": "Dek / standfirst from RSS <description>."
+    },
+    "articleBody": {
+      "type": "string",
+      "description": "Full article body — populated from the on-page NewsArticle.articleBody JSON-LD, not the RSS feed."
+    },
+    "datePublished": {
+      "type": "string",
+      "format": "date-time",
+      "description": "RSS <pubDate>, RFC 822 in the feed; ISO 8601 in JSON-LD."
+    },
+    "dateModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Available from NewsArticle.dateModified; not present in RSS."
+    },
+    "publisher": {
+      "type": "string",
+      "const": "Condé Nast",
+      "description": "Always 'Condé Nast' — RSS <dc:publisher>."
+    },
+    "brand": {
+      "type": "string",
+      "enum": [
+        "Vogue", "Vogue Business", "GQ", "The New Yorker", "Wired",
+        "Vanity Fair", "Bon Appétit", "Architectural Digest", "Pitchfork",
+        "Allure", "Glamour", "Self", "Teen Vogue", "Condé Nast Traveler",
+        "Epicurious", "Tatler", "House & Garden", "The World of Interiors",
+        "Ars Technica", "La Cucina Italiana", "Johansens"
+      ],
+      "description": "Publishing brand — derived from the feed channel <title>."
+    },
+    "edition": {
+      "type": "string",
+      "description": "Geographic edition, e.g. 'US', 'UK', 'FR', 'IT', 'IN'. Inferred from the brand domain."
+    },
+    "author": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Author byline(s) — RSS <dc:creator>; schema.org NewsArticle.author."
+    },
+    "section": {
+      "type": "string",
+      "description": "Primary site section — RSS <category> root and NewsArticle.articleSection."
+    },
+    "categories": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Full set of section/tag paths from RSS <category> elements (slash-separated hierarchy)."
+    },
+    "subject": {
+      "type": "string",
+      "description": "RSS <dc:subject> — typically the column or franchise name."
+    },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tag list — RSS <media:keywords> split on commas."
+    },
+    "thumbnail": {
+      "type": "object",
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "width": { "type": "integer" },
+        "height": { "type": "integer" }
+      },
+      "required": ["url"],
+      "description": "Lead image — RSS <media:thumbnail> attributes."
+    },
+    "breadcrumb": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "position": { "type": "integer" },
+          "name": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        },
+        "required": ["position", "name"]
+      },
+      "description": "Site hierarchy — schema.org BreadcrumbList block on the article page."
+    }
+  },
+  "additionalProperties": false
+}
