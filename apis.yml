@@ -127,6 +127,8 @@ apis:
   - type: Feed
     url: https://www.gq.com.mx/feed/rss
     title: GQ México y Latinoamérica
+  - url: graphql/conde-nast-graphql.md
+    type: GraphQL
 - aid: conde-nast:article-json-ld
   name: Condé Nast Article JSON-LD
   description: >-
