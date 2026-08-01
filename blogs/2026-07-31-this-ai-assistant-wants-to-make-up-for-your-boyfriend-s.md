@@ -1,0 +1,8 @@
+---
+title: "This AI Assistant Wants to Make Up for Your Boyfriend’s Incompetence"
+url: "https://www.wired.com/story/this-ai-assistants-whole-pitch-is-making-up-for-your-boyfriends-incompetence/"
+date: "2026-07-31"
+author: "Jason Parham"
+feed_url: "https://www.wired.com/feed/rss"
+---
+An ad for Orchid suggests the AI agent can fix relationship problems by simply doing everything for inconsiderate partners.
