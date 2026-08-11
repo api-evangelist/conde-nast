@@ -250,6 +250,11 @@ apis:
     url: https://www.youtube.com/@bonappetit
     title: Bon Appétit YouTube
 common:
+- type: IssueTracker
+  url: https://github.com/CondeNast/copilot-util/issues
+- type: License
+  name: MIT
+  url: https://github.com/CondeNast/copilot-util/blob/master/LICENSE
 - type: DomainSecurity
   url: security/conde-nast-domain-security.yml
 - type: Website
