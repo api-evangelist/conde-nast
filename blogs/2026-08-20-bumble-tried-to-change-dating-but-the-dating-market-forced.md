@@ -1,0 +1,8 @@
+---
+title: "Bumble Tried to Change Dating, but the Dating Market Forced It to Change Instead"
+url: "https://www.wired.com/story/bumble-women-first-rule-change/"
+date: "2026-08-20"
+author: "Jason Parham"
+feed_url: "https://www.wired.com/feed/rss"
+---
+The app now allows men to make the first move, suggesting its women-first positioning was limiting growth. It joins other dating apps now throwing everything at the wall in a bid to stay relevant.
