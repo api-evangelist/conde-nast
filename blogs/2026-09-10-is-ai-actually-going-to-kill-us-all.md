@@ -1,0 +1,8 @@
+---
+title: "Is AI Actually Going to Kill Us All?"
+url: "https://www.wired.com/story/uncanny-valley-podcast-is-ai-actually-going-to-kill-us-all/"
+date: "2026-09-10"
+author: "Brian Barrett, Leah Feiger, Will Knight"
+feed_url: "https://www.wired.com/feed/rss"
+---
+This week on “Uncanny Valley,” we dig into a former Anthropic researcher’s AI doomsday warning, the latest upgrades from Apple’s event, and the census report that claimed Trump won the 2020 election.
