@@ -72,6 +72,12 @@ apis:
   tags:
   - RSS
   - Syndication
+  - Feed
+  - Editorial
+  - Media RSS
+  tags_raw:
+  - RSS
+  - Syndication
   - Feeds
   - Editorial
   - Media RSS
