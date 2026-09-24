@@ -1,1 +1,0 @@
-# Condé Nast GraphQL API
