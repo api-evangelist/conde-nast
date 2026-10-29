@@ -64,120 +64,128 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Condé Nast is a global media company owned by Advance Publications,
-producing editorial content across more than two dozen iconic brands —
-Vogue, GQ, The New Yorker, Wired, Vanity Fair, Bon Appétit,
-Architectural Digest, Pitchfork, Allure, Glamour, Self, Teen Vogue,
-Condé Nast Traveler, Epicurious, Tatler, House & Garden, The World of
-Interiors, Ars Technica, Vogue Business, La Cucina Italiana and
-Johansens.
+Condé Nast is a global media company owned by Advance Publications that produces editorial content across more than two dozen iconic brands — Vogue, GQ, The New Yorker, Wired, Vanity Fair, Bon Appétit, Architectural Digest, Pitchfork, Allure, Glamour, Self, Teen Vogue, Condé Nast Traveler, Epicurious, Tatler, House & Garden, The World of Interiors, Ars Technica, Vogue Business, La Cucina Italiana and Johansens. Public content surfaces are not a developer API but a federated set of brand-level RSS feeds, schema.org NewsArticle JSON-LD on every article, monthly XML sitemaps, syndicated video on YouTube and OTT, and a private editorial CMS (internally known as Copilot) that powers all sites.
 
-There is no public Condé Nast API. The publicly observable surface is a
-federated set of brand-level RSS feeds, schema.org NewsArticle JSON-LD
-on every article page, monthly XML sitemaps, syndicated video on
-YouTube, and an authenticated-only internal developer portal at
-`technology.condenast.com`. The CMS powering every site is the
-internally-developed **Copilot** platform — visible publicly only
-through `github.com/CondeNast/copilot-util` and the auth-gated portal.
+**Areas:** Media · Publishing · Magazines · News · Journalism · RSS · Video · JSON-LD · Schema.org
 
-This profile catalogs those surfaces and gives them a normalized shape.
+## Condé Nast on APIs.io
 
-## Content surfaces
+Everything profiled for Condé Nast is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/conde-nast/](https://apis.io/providers/conde-nast/)** — or go straight to one of the APIs or properties below.
 
-| Surface | Path / location | Notes |
-| --- | --- | --- |
-| Brand RSS feed | `/feed/rss` on every brand domain | RSS 2.0 + Dublin Core + Media RSS + Atom; CloudFront-cached; soft rate limit of 100 req/window via `x-ratelimit-userlimit` |
-| Article JSON-LD | `<script type="application/ld+json">` on every article page | schema.org `NewsArticle` + `BreadcrumbList` |
-| Sitemap index | `/sitemap.xml` on every brand domain | Per-month sub-sitemaps (`/sitemap-YYYY-MM.xml`) going back several years |
-| Video | Brand-level YouTube channels (`@WIRED`, `@Vogue`, `@GQ`, `@VanityFair`, `@bonappetit`, etc.) | No public catalog API; use YouTube Data API against the channel handle |
-| Newsletters / podcasts | Per-brand opt-in pages and standard podcast RSS | No API |
-| Internal developer portal | `technology.condenast.com` | Returns HTTP 307 to `/auth/signin` — not public |
+### APIs (5)
 
-## Brands covered
+- [Condé Nast Brand RSS Feeds](https://apis.io/apis/conde-nast/brand-rss-feeds/) — Every Condé Nast brand site serves a top-level RSS 2.0 feed at `/feed/rss` covering the brand's most recent published articles, with Dublin Core…
+- [Condé Nast Article JSON-LD](https://apis.io/apis/conde-nast/article-json-ld/) — Every published article on every Condé Nast brand site embeds schema.org structured data as `<script type="application/ld+json">` blocks in the page head.…
+- [Condé Nast Brand Sitemap Index](https://apis.io/apis/conde-nast/brand-sitemaps/) — Each brand site exposes an XML sitemap index at `/sitemap.xml` pointing to per-month sub-sitemaps (e.g. `/sitemap-2026-05.xml`). Sub-sitemaps list every URL…
+- [Condé Nast Copilot CMS (internal)](https://apis.io/apis/conde-nast/copilot-cms/) — Copilot is Condé Nast's internally-developed editorial platform that powers every brand site. Surface evidence in the open: the GitHub repository…
+- [Condé Nast Entertainment Video Distribution](https://apis.io/apis/conde-nast/video-distribution/) — Condé Nast Entertainment, launched in 2011, develops film, TV, social and digital video, and VR. Video is distributed off-platform via brand-owned YouTube…
 
-US flagships (`/feed/rss` confirmed live, May 2026):
+### Published properties
 
-- Vogue · vogue.com
-- GQ · gq.com
-- The New Yorker · newyorker.com
-- Wired · wired.com
-- Vanity Fair · vanityfair.com
-- Bon Appétit · bonappetit.com
-- Architectural Digest · architecturaldigest.com
-- Pitchfork · pitchfork.com
-- Allure · allure.com
-- Glamour · glamour.com
-- Self · self.com
-- Teen Vogue · teenvogue.com
-- Condé Nast Traveler · cntraveler.com
-- Epicurious · epicurious.com
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-International editions of Vogue (`/feed/rss` confirmed live): UK, France,
-Italy, Mexico & Latin America, Spain, India, Taiwan. International
-editions of GQ: UK, Italy, Mexico.
+#### GraphQL (1)
 
-Additional brands listed in the corporate brand book but not separately
-profiled here: Vogue Business, Tatler, House & Garden, The World of
-Interiors, Ars Technica, La Cucina Italiana, Johansens.
+GraphQL schemas.
 
-## Repository layout
+- [Moved to /providers/conde-nast/](https://apis.io/graphqls/conde-nast/conde-nast-graphql/)
 
-```
-conde-nast/
-├── apis.yml                                        # APIs.json — five logical surfaces
-├── README.md                                       # this file
-├── json-ld/
-│   └── conde-nast-context.jsonld                   # JSON-LD context bridging RSS + schema.org
-├── json-schema/
-│   └── conde-nast-article-schema.json              # normalized article schema
-├── vocabulary/
-│   └── conde-nast-vocabulary.yml                   # editorial / brand vocabulary
-└── examples/
-    ├── wired-article-example.json                  # NewsArticle from Wired
-    └── epicurious-recipe-example.json              # Recipe roundup from Epicurious
-```
+#### JSON Schema (1)
 
-## What is NOT in this repo (and why)
+The data models the API reads and writes.
 
-- **No `openapi/`** — Condé Nast publishes no OpenAPI spec; the content
-  surface is RSS and embedded JSON-LD, neither of which is a REST API.
-- **No `rules/`** — without OpenAPI there is nothing for Spectral to
-  lint.
-- **No `capabilities/`** — Naftiko capabilities target programmable APIs;
-  there is no programmable API here to model.
-- **No `plans/`, `rate-limits/`, `finops/`** — Condé Nast does not
-  publish per-API pricing, rate limits or billing surfaces. Content
-  licensing is bilateral and brokered through
-  `condenast.com/contact`.
-- **No status page** — Condé Nast does not run a public status page.
+- [Condé Nast Article](https://apis.io/schemas/conde-nast/conde-nast-article/)
 
-## Notable findings
+#### JSON-LD (1)
 
-- The `/feed/rss` pattern is universal across US flagships and across
-  international Vogue and GQ editions — making the brand portfolio
-  trivially crawlable as a single homogeneous federation of feeds.
-- Every brand site embeds two JSON-LD blocks per article
-  (`NewsArticle` + `BreadcrumbList`) — the practical contract for any
-  programmatic consumer.
-- The `CondeNast` GitHub org has 142 public repositories but is
-  dominated by tooling (Puppet, Ember, React utilities), hackathon
-  experiments and the public face of Copilot
-  (`CondeNast/copilot-util`) — no SDKs, no public API client libraries.
-- `technology.condenast.com` exists but is locked behind a sign-in —
-  Condé Nast operates a real internal developer platform, just not a
-  public one.
+Linked-data contexts for the provider's vocabulary.
 
-## Scale (from public sources)
+- [Conde Nast Context](https://apis.io/jsonld/conde-nast/conde-nast-context/)
 
-- "More than 72 million consumers in print"
-- "394 million in digital"
-- "454 million across social media platforms"
+#### Vocabulary (1)
 
-## Ownership
+The provider's domain terms, defined.
 
-Condé Nast is wholly owned by **Advance Publications**, the privately
-held S.I. Newhouse family holding company.
+- [Conde Nast Vocabulary](https://apis.io/vocabularies/conde-nast/conde-nast-vocabulary/)
 
-## Maintainer
+#### Examples (2)
 
-Kin Lane — kin@apievangelist.com
+Example requests and responses.
+
+- [Epicurious Recipe Example](https://apis.io/examples/conde-nast/epicurious-recipe-example/)
+- [Wired Article Example](https://apis.io/examples/conde-nast/wired-article-example/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Condé Nast — jsonschema rules](https://apis.io/rules/conde-nast/conde-nast-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Conde Nast Domain Security](https://apis.io/security/conde-nast/conde-nast-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.condenast.com)
+- [Blog](https://www.wired.com/feed/rss)
+- [Terms of service](https://www.condenast.com/user-agreement)
+- [Privacy policy](https://www.condenast.com/privacy-policy)
+- [GitHub](https://github.com/CondeNast)
+
+## API Evangelist rating
+
+**Kin Score 17.7** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 63.4 |
+| Contract quality | 10.7 |
+| Contract governance | 9.8 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 11.9 |
+| Access clarity | 21.1 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 18.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/conde-nast/](https://apis.io/providers/conde-nast/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Condé Nast: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/conde-nast/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
